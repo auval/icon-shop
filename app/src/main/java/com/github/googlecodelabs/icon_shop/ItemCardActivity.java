@@ -27,6 +27,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 public class ItemCardActivity extends AppCompatActivity {
     public static final String INTENT_EXTRA_ITEM = "item";
     private App.ItemData mItem;
@@ -64,6 +66,15 @@ public class ItemCardActivity extends AppCompatActivity {
                     }
                 });
                 ok.show();
+
+                // Logging analytics event when adding item to the cart:
+                Bundle params = new Bundle();
+                params.putString( FirebaseAnalytics.Param.ITEM_ID, mItem.mName );
+                params.putString( FirebaseAnalytics.Param.ITEM_CATEGORY, "icon" );
+                params.putLong( FirebaseAnalytics.Param.VALUE, mItem.mPrice );
+                FirebaseAnalytics analytics = FirebaseAnalytics.getInstance( ItemCardActivity.this );
+                analytics.logEvent( FirebaseAnalytics.Event.ADD_TO_CART, params );
+
             }
         });
 

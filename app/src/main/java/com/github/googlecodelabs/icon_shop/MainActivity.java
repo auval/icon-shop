@@ -34,6 +34,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -137,6 +139,13 @@ public class MainActivity extends AppCompatActivity
                 return null;
             }
         }.execute();
+
+        // here's an example of a custom property
+        // capture the users' profession, add it as a property
+        // now the rest of the events that are logged will carry with them this user property so
+        // that you can filter your analytics reports accordingly
+        FirebaseAnalytics analytics = FirebaseAnalytics.getInstance( this );
+        analytics.setUserProperty( "profession", profession );
     }
 
     public void showSnackbar(String text) {

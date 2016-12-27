@@ -30,6 +30,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -90,6 +92,13 @@ public class CartActivity extends AppCompatActivity {
                         }.execute();
                     }
                 }, TimeUnit.SECONDS.toMillis(2)); // Delay for 2 seconds
+
+                // Log analytics event when user click on "checkout" button
+                Bundle params = new Bundle();
+                params.putLong( FirebaseAnalytics.Param.VALUE, getCartBalance());
+                FirebaseAnalytics.getInstance( CartActivity.this )
+                        .logEvent( FirebaseAnalytics.Event.ECOMMERCE_PURCHASE, params );
+
             }
         });
 
