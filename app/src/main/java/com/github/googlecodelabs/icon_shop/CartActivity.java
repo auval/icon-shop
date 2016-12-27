@@ -66,7 +66,7 @@ public class CartActivity extends AppCompatActivity {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        AsyncTask<Void, Void, Void> _ = new AsyncTask<Void, Void, Void>() {
+                        AsyncTask<Void, Void, Void> _s = new AsyncTask<Void, Void, Void>() {
                             @Override
                             protected Void doInBackground(Void... voids) {
                                 App.clearCart();
